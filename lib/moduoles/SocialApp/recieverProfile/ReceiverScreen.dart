@@ -2,16 +2,16 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_app/Models/SocialApp/PostModel.dart';
+import 'package:to_do_app/Models/SocialApp/Social_User_Model.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'package:to_do_app/moduoles/SocialApp/ChatsDetails/ChatsDetailsScreen.dart';
 import 'package:to_do_app/moduoles/SocialApp/Followers/FollowersScreen.dart';
 import 'package:to_do_app/moduoles/SocialApp/Following/FollowingScreen.dart';
-import '../../../Models/SocialApp/PostModel.dart';
-import '../../../Models/SocialApp/Social_User_Model.dart';
 import '../../../Shared/Components/Components.dart';
 import '../../../Shared/styles/Colors.dart';
 import '../../../Shared/styles/icon_broken.dart';
-import '../../../layout/SocialAppLayout/cubit/cubit.dart';
-import '../../../layout/SocialAppLayout/cubit/states.dart';
 import '../CommentScreen/CommentsScreen.dart';
 import '../Likes/Likes.dart';
 
@@ -143,7 +143,7 @@ class ReceiverProfileScreen extends StatelessWidget {
                       ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context,index) =>  SocialCubit.get(context).myPosts.isEmpty ? const Center(child: Image(image: AssetImage('assets/images/empty.png'), width: 200.0, ),) :  buildPostItem(cubit.myPosts[index],context , index , controller)   ,
+                        itemBuilder: (context,index) =>  SocialCubit.get(context).myPosts.isEmpty ? const Center(child: Image(image: AssetImage('assets/images/empty.png'), width: 200.0, ),) :  buildPostItem(cubit.myPosts[index] as PostDataModel,context , index , controller)   ,
                         itemCount: cubit.myPosts.length,
                         separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 15.0,),
                       )

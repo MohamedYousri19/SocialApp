@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/Models/SocialApp/PostModel.dart';
 import 'package:to_do_app/Shared/Components/Components.dart';
-import 'package:to_do_app/Shared/styles/Colors.dart';
-import 'package:to_do_app/layout/ShopLayout/cubit/cubit.dart';
+import 'package:to_do_app/Shared/styles/colors.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'package:to_do_app/moduoles/SocialApp/CommentScreen/CommentsScreen.dart';
@@ -54,7 +53,7 @@ class FeedsScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'Communicate with friends',
-                          style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -63,16 +62,20 @@ class FeedsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10,),
                 ConditionalBuilder(
-                  condition: SocialCubit.get(context).posts.isNotEmpty && SocialCubit.get(context).userModel != null   ,
-                  builder:  (context) =>  ListView.separated(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context,index) => buildPostItem(cubit.posts[index],context , index , controller ),
-                    itemCount: cubit.posts.length,
-                    separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 15.0,),
+                  condition: SocialCubit.get(context).userModel != null   ,
+                  builder:  (context) => ConditionalBuilder(
+                      condition: SocialCubit.get(context).posts.isNotEmpty,
+                      builder: (context) =>  ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context,index) => buildPostItem(cubit.posts[index],context , index , controller ),
+                        itemCount: cubit.posts.length,
+                        separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 15.0,),
+                      ),
+                      fallback: (context) =>  const Center ( child: Image(image: AssetImage('assets/images/empty.png')))
                   ),
                   fallback: (context) => const Center(
-                    child: Image(image: AssetImage('assets/images/empty.png'), width: 200.0, ),
+                    child:CircularProgressIndicator(),
                   ),
                 )
               ],
@@ -84,14 +87,16 @@ class FeedsScreen extends StatelessWidget {
   }
 
 
-  Widget buildPostItem(PostDataModel model,context , index , TextEditingController controller ) => Card(
+  Widget buildPostItem(PostDataModel model,context,index,TextEditingController controller) => Card(
     clipBehavior: Clip.antiAliasWithSaveLayer,
     elevation: 5.0,
-    margin: EdgeInsets.symmetric(horizontal: 15.0),
+    margin: const EdgeInsets.symmetric(horizontal: 15.0),
     color: Colors.white,
     child: Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -122,7 +127,7 @@ class FeedsScreen extends StatelessWidget {
                     '${model.dateTime}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption
+                        .bodySmall
                         ?.copyWith(color: Colors.grey[600]),
                   )
                 ],
@@ -141,12 +146,11 @@ class FeedsScreen extends StatelessWidget {
               color: Colors.grey,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          Column(
             children: [
               Text(
-                '${model.text}',
-                style: TextStyle(height: 1.2),
+               '${model.text}',
+               style: TextStyle(height: 1.2 ,),
               ),
             ],
           ),

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/Network/Local/Cach_Helper.dart';
 import 'package:to_do_app/Network/Remote/dio_helper.dart';
 import 'package:to_do_app/Shared/Components/Components.dart';
-import 'package:to_do_app/layout/ShopLayout/cubit/states.dart';
-import 'package:to_do_app/layout/todoApp/cubit/cubit.dart';
-import 'package:to_do_app/moduoles/SocialApp/ChatsDetails/ChatsDetailsScreen.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'Shared/Components/Constants.dart';
 import 'Shared/styles/Themes.dart';
 import 'Shared/bolck_observer.dart';
 import 'firebase_options.dart';
-import 'layout/NewsApp/Cubit/cubit.dart';
-import 'layout/ShopLayout/cubit/cubit.dart';
 import 'layout/SocialAppLayout/SocialLayout.dart';
 import 'layout/SocialAppLayout/cubit/cubit.dart';
 import 'moduoles/SocialApp/SocialLogin/SocialLoginScreen.dart';
@@ -29,6 +23,7 @@ Future<void> FirebaseBackgroundMessage(RemoteMessage message)async {
 
 
 void main()async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -69,24 +64,11 @@ void main()async {
     widget = const SocialLoginScreen() ;
   }
 
-  // if(onBoarding != null){
-  //   if(token != null ){
-  //     widget = const ShopLayOut();
-  //   }else{
-  //     widget = const ShopLogin() ;
-  //   }
-  // }else{
-  //   widget =
-  //   const OnBoardingScreen() ;
-  // }
- //print('onBoarding');
-  //print(onBoarding);
-
   runApp( MyApp(startWidget: widget, isDark: isDark,));
 }
 
 class MyApp extends StatelessWidget {
-  final Widget startWidget ;
+  final Widget  startWidget ;
   final dynamic isDark ;
   MyApp({
     super.key,
@@ -100,24 +82,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) =>  NewsCubit()..getBusiness(),),
-        BlocProvider(create: (context) =>  ShopCubit()..getHomeData()..getCategoriesData()..getFavoritesData()..getUserData()..changeAppMode(
-          fromShared: isDark
-        )),
-        BlocProvider(create: (BuildContext context)=> AppCupit()),
         BlocProvider(create: (BuildContext context)=> SocialCubit()..getUserData()..getPosts()),
       ],
-      child: BlocConsumer<ShopCubit,ShopStates>(
+      child: BlocConsumer<SocialCubit,SocialStates>(
         listener: (context,state){},
         builder: (context,state){
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme:lightTheme,
             darkTheme: darkTheme ,
-            themeMode: ShopCubit.get(context).isDark ? ThemeMode.dark: ThemeMode.light ,
+            themeMode: ThemeMode.light ,
             home: Directionality(
                 textDirection: TextDirection.ltr,
-                child: startWidget,
+                child: startWidget ,
             ),
           );
         },

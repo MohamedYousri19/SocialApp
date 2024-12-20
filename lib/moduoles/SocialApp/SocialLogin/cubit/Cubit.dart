@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/Network/Local/Cach_Helper.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/moduoles/SocialApp/SocialLogin/cubit/states.dart';
 
 class SocialLoginCubit extends Cubit<SocialLoginState> {
@@ -20,6 +21,8 @@ class SocialLoginCubit extends Cubit<SocialLoginState> {
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) => {
           print(value.user!.email),
+          print('value.user!.uid'),
+          print(value.user!.uid),
       emit(SocialLoginSuccessState(value.user!.uid)) ,
     })
         .catchError((error) {

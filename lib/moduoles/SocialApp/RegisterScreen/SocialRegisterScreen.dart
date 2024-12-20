@@ -2,10 +2,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/layout/SocialAppLayout/SocialLayout.dart';
+import 'package:to_do_app/moduoles/SocialApp/RegisterScreen/cubit/Cubit.dart';
+import 'package:to_do_app/moduoles/SocialApp/RegisterScreen/cubit/states.dart';
 import '../../../Shared/Components/Components.dart';
 import '../SocialLogin/SocialLoginScreen.dart';
-import 'cubit/Cubit.dart';
-import 'cubit/states.dart';
 
 class SocialRegisterScreen extends StatelessWidget {
   const SocialRegisterScreen({super.key});
@@ -32,9 +32,9 @@ class SocialRegisterScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('REGISTER' , style: Theme.of(context).textTheme.headline4?.copyWith(fontWeight: FontWeight.bold),),
+                          Text('REGISTER' , style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),),
                           const SizedBox(height: 15.0,),
-                          Text('Register now to communicate with friends' , style: Theme.of(context).textTheme.bodyText1?.copyWith(color: Colors.grey),),
+                          Text('Register now to communicate with friends' , style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),),
                           const SizedBox(height: 20.0,),
                           default_TextField(
                             titleController: nameController,

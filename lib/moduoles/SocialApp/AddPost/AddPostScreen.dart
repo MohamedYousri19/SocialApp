@@ -5,7 +5,7 @@ import 'package:icon_broken/icon_broken.dart';
 import 'package:to_do_app/Shared/Components/Components.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
-import '../../../Shared/styles/Colors.dart';
+import '../../../Shared/styles/colors.dart';
 
 class AddPostScreen extends StatelessWidget {
   const AddPostScreen({super.key});

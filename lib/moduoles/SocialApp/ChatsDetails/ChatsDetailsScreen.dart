@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_broken/icon_broken.dart';
 import 'package:to_do_app/Models/SocialApp/MessageModel.dart';
 import 'package:to_do_app/Models/SocialApp/Social_User_Model.dart';
-import 'package:to_do_app/Shared/styles/Colors.dart';
+import 'package:to_do_app/Shared/styles/colors.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'package:to_do_app/moduoles/SocialApp/chat_bubble/chat_bubble_sender.dart';
@@ -11,7 +11,7 @@ import 'package:to_do_app/moduoles/SocialApp/chat_bubble/chat_bubble_sender.dart
 import '../chat_bubble/chat_bubble_reciever.dart';
 
 class ChatsDetailsScreen extends StatelessWidget {
-  UserDataModel userDataModel ;
+  UserDataModel? userDataModel ;
   ChatsDetailsScreen({super.key , required this.userDataModel});
 
   var messageController = TextEditingController() ;
@@ -20,7 +20,7 @@ class ChatsDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (BuildContext context) {
-        SocialCubit.get(context).getMessages(receiverId: userDataModel.uId.toString());
+        SocialCubit.get(context).getMessages(receiverId: userDataModel!.uId.toString());
       return BlocConsumer<SocialCubit,SocialStates>(
         listener: (BuildContext context, Object? state) {  },
         builder: (BuildContext context, state) {
@@ -30,10 +30,10 @@ class ChatsDetailsScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 23.0,
-                      backgroundImage: NetworkImage('${userDataModel.image}'),
+                      backgroundImage: NetworkImage('${userDataModel!.image}'),
                     ),
                     const SizedBox(width: 5.0,),
-                    Text('${userDataModel.username}' , style:  const TextStyle(fontSize: 20.0),),
+                    Text('${userDataModel!.username}' , style:  const TextStyle(fontSize: 20.0),),
                   ],
                 ),
                 leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: const Icon(IconBroken.Arrow___Left)),
@@ -110,7 +110,7 @@ class ChatsDetailsScreen extends StatelessWidget {
                             if(messageController.text.isEmpty){
                               print('none');
                             }else{
-                              SocialCubit.get(context).SendMessage(receiverId: userDataModel.uId!, text: messageController.text);
+                              SocialCubit.get(context).SendMessage(receiverId: userDataModel!.uId!, text: messageController.text);
                               messageController.clear();
                             }
                           },

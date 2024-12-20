@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:to_do_app/Shared/styles/Colors.dart';
+import 'package:to_do_app/Shared/styles/colors.dart';
 
 ThemeData darkTheme = ThemeData(
     primaryColor: defaultColor,
@@ -50,12 +50,12 @@ ThemeData darkTheme = ThemeData(
       elevation: 20.0,
     ),
     textTheme:  const TextTheme(
-        bodyText1: TextStyle(
+        bodyLarge: TextStyle(
             fontSize: 17.0,
             fontWeight: FontWeight.w400,
             color: Colors.white
         ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
           fontSize: 15.0,
           height: 1,
           color: Colors.white
@@ -117,12 +117,12 @@ ThemeData lightTheme =  ThemeData(
       elevation: 20.0,
     ),
     textTheme:  const TextTheme(
-      bodyText1: TextStyle(
+      bodyLarge: TextStyle(
           fontSize: 15.0,
           fontWeight: FontWeight.w600,
           color: Colors.black
       ),
-      bodyText2: TextStyle(
+      bodyMedium: TextStyle(
           fontSize: 15.0,
           height: 1,
           color: Colors.black

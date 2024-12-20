@@ -8,7 +8,7 @@ import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'package:to_do_app/moduoles/SocialApp/ChatsDetails/ChatsDetailsScreen.dart';
 
-import '../../../Shared/styles/Colors.dart';
+import '../../../Shared/styles/colors.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});

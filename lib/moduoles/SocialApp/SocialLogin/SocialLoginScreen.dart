@@ -1,8 +1,10 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/Network/Local/Cach_Helper.dart';
 import 'package:to_do_app/layout/SocialAppLayout/SocialLayout.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/moduoles/SocialApp/SocialLogin/cubit/Cubit.dart';
 import 'package:to_do_app/moduoles/SocialApp/SocialLogin/cubit/states.dart';
 import '../../../Shared/Components/Components.dart';
@@ -19,14 +21,17 @@ class SocialLoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => SocialLoginCubit(),
       child: BlocConsumer<SocialLoginCubit, SocialLoginState>(
-        listener: (BuildContext context, Object? state) {
+        listener: (BuildContext context, Object? state) async {
           if (state is SocialLoginErrorState) {
             ShowToast(
                 text: state.error.toString(), backgroundColor: Colors.red
             );
           }
           if (state is SocialLoginSuccessState) {
-           CachHelper.saveData(key: 'uId', value: state.uId);
+           await CachHelper.saveData(key: 'uId', value: state.uId);
+           print(CachHelper.getData(key: 'uId'));
+           SocialCubit.get(context).getUserData();
+           SocialCubit.get(context).getPosts();
            NavigateAndFinish(context, const SocialLayout()) ;
           }
         },
@@ -46,7 +51,7 @@ class SocialLoginScreen extends StatelessWidget {
                           'LOGIN',
                           style: Theme.of(context)
                               .textTheme
-                              .headline4
+                              .headlineSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(
@@ -56,7 +61,7 @@ class SocialLoginScreen extends StatelessWidget {
                           'Login now to communicate with friends',
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText1
+                              .bodyLarge
                               ?.copyWith(color: Colors.grey),
                         ),
                         const SizedBox(

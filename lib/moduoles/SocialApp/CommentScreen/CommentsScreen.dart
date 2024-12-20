@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:icon_broken/icon_broken.dart';
 import 'package:to_do_app/Models/SocialApp/Comments.dart';
-import 'package:to_do_app/Shared/styles/Colors.dart';
+import 'package:to_do_app/Shared/styles/colors.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,6 +11,7 @@ import 'package:to_do_app/Models/SocialApp/MessageModel.dart';
 import 'package:to_do_app/Models/SocialApp/PostModel.dart';
 import 'package:to_do_app/Models/SocialApp/Social_User_Model.dart';
 import 'package:to_do_app/Models/SocialApp/likes.dart';
+import 'package:to_do_app/Network/Local/Cach_Helper.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'package:to_do_app/moduoles/SocialApp/Chats/ChatsScreen.dart';
 import 'package:to_do_app/moduoles/SocialApp/Feeds/FeedsScreen.dart';
@@ -26,9 +28,11 @@ class SocialCubit extends Cubit<SocialStates> {
 
   Future<void> getUserData() async {
     emit(SocialGetUserLoadingState());
+    print('uId');
+    print(uId);
     FirebaseFirestore.instance
         .collection('users')
-        .doc(uId)
+        .doc(CachHelper.getData(key: 'uId'))
         .get()
         .then((value) =>
     {
@@ -37,7 +41,10 @@ class SocialCubit extends Cubit<SocialStates> {
       emit(SocialGetUserSuccessState()),
     })
         .catchError((error) {
-          print(error.toString());
+          if (kDebugMode) {
+            print(error.toString());
+            print("error.toString()");
+          }
       emit(SocialGetUserErrorState(error.toString()));
     });
   }
@@ -217,8 +224,7 @@ class SocialCubit extends Cubit<SocialStates> {
   File? PostImage;
 
   Future getPostImage() async {
-    final pickedFile =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       PostImage = File(pickedFile.path);
@@ -235,10 +241,7 @@ class SocialCubit extends Cubit<SocialStates> {
     emit(SocialUploadPostImageLoadingState());
     FirebaseStorage.instance
         .ref()
-        .child('users/${Uri
-        .file(PostImage!.path)
-        .pathSegments
-        .last}')
+        .child('users/${Uri.file(PostImage!.path).pathSegments.last}')
         .putFile(PostImage!)
         .then((value) =>
     {
@@ -488,7 +491,7 @@ class SocialCubit extends Cubit<SocialStates> {
     MessageModel message = MessageModel(
       receiverId: receiverId,
       message: text,
-      dateTime: DateTime.now().toString(),
+      dateTime: DateTime.now().toString(), 
       senderId: userModel!.uId,
     );
     FirebaseFirestore.instance

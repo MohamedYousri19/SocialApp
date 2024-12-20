@@ -2,11 +2,12 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_app/Models/SocialApp/Social_User_Model.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
+import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 import 'package:to_do_app/moduoles/SocialApp/recieverProfile/ReceiverScreen.dart';
-import '../../../Models/SocialApp/Social_User_Model.dart';
 import '../../../Shared/Components/Components.dart';
-import '../../../layout/SocialAppLayout/cubit/cubit.dart';
-import '../../../layout/SocialAppLayout/cubit/states.dart';
+
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
@@ -19,7 +20,7 @@ class UsersScreen extends StatelessWidget {
         return ConditionalBuilder(
           condition: cubit.allUsers.isNotEmpty,
           builder: (context) =>  ListView.separated(
-              itemBuilder: (context,index) => buildListUsers(cubit.allUsers[index],context),
+              itemBuilder: (context,index) => buildListUsers(cubit.allUsers[index] as UserDataModel,context),
               separatorBuilder: (context,index) => line(),
               itemCount: cubit.allUsers.length
           ),

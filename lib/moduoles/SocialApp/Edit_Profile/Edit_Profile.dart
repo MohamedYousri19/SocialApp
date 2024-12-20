@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/Shared/Components/Components.dart';
-import 'package:to_do_app/Shared/styles/Colors.dart';
+import 'package:to_do_app/Shared/styles/colors.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/cubit.dart';
 import 'package:to_do_app/layout/SocialAppLayout/cubit/states.dart';
 
@@ -22,6 +22,7 @@ class EditProfileScreen extends StatelessWidget {
         var nameController = TextEditingController();
         var bioController = TextEditingController();
         var phoneController = TextEditingController();
+
         nameController.text = SocialCubit.get(context).userModel!.username! ;
         bioController.text = SocialCubit.get(context).userModel!.bio! ;
         phoneController.text = SocialCubit.get(context).userModel!.phone! ;

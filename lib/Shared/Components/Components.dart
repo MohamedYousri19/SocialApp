@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:to_do_app/Shared/styles/Colors.dart';
+import 'package:to_do_app/Shared/styles/colors.dart';
 Widget default_TextField({
   TextEditingController? titleController ,
   String? hintText ,
@@ -73,7 +72,7 @@ Widget build_list_news(article,context) => Padding(
                 Expanded(
                   child: Text(
                     '${article['title']}',
-                    style: Theme.of(context).textTheme.bodyText1,
+                    style: Theme.of(context).textTheme.bodyLarge,
                     maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                   ),
@@ -104,11 +103,10 @@ void NavigateTo(context , widget) => Navigator.push(
         builder: (context) => widget
     ),
 );
-void NavigateAndFinish(context,widget) =>  Navigator.pushAndRemoveUntil(
+void NavigateAndFinish(context,widget) => Navigator.pushAndRemoveUntil(
     context, MaterialPageRoute(
     builder: (context) => widget
-),
-        (route) => false) ;
+), (route) => false) ;
 
 Widget defaulButton({
   required Function function,
@@ -132,16 +130,16 @@ Widget defaulButton({
       },
     child: Text(name , style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold , fontSize: 16.0),),
   ),
-) ;
-
-Widget defaultTextButton({
-  required String text,
-  required Function pressed,
-  Color? color ,
-}) => TextButton(
-    onPressed: (){pressed();}
-    , child: Text(text,style: TextStyle(color: color , fontWeight: FontWeight.bold),),
 );
+
+  Widget defaultTextButton({
+    required String text,
+    required Function pressed,
+    Color? color ,
+  }) => TextButton(
+      onPressed: (){pressed();}
+      , child: Text(text,style: TextStyle(color: color , fontWeight: FontWeight.bold),),
+  );
 
 void ShowToast({
   required String text,

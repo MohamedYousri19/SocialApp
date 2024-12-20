@@ -72,8 +72,8 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        Text('${userModel.username}',style: Theme.of(context).textTheme.bodyText1,),
-                        Text('${userModel.bio}',style: Theme.of(context).textTheme.caption,),
+                        Text('${userModel.username}',style: Theme.of(context).textTheme.bodyLarge,),
+                        Text('${userModel.bio}',style: Theme.of(context).textTheme.bodySmall,),
                       ],
                     ),
                     SizedBox(height: 10.0,),
@@ -85,8 +85,8 @@ class SettingsScreen extends StatelessWidget {
                             child:
                             Column(
                               children: [
-                                Text('${cubit.myPosts.length}',style: Theme.of(context).textTheme.bodyText1,),
-                                Text('Posts',style: Theme.of(context).textTheme.caption?.copyWith(fontWeight: FontWeight.bold,color: Colors.grey),),
+                                Text('${cubit.myPosts.length}',style: Theme.of(context).textTheme.bodyLarge,),
+                                Text('Posts',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold,color: Colors.grey),),
                               ],
                             ),
                             onTap: (){},
@@ -97,8 +97,8 @@ class SettingsScreen extends StatelessWidget {
                             child:
                             Column(
                               children: [
-                                Text('${SocialCubit.get(context).myFollowers.length}',style: Theme.of(context).textTheme.bodyText1),
-                                Text('Followers',style: Theme.of(context).textTheme.caption?.copyWith(fontWeight: FontWeight.bold,color: Colors.grey),),
+                                Text('${SocialCubit.get(context).myFollowers.length}',style: Theme.of(context).textTheme.bodyLarge),
+                                Text('Followers',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold,color: Colors.grey),),
                               ],
                             ),
                             onTap: (){
@@ -111,8 +111,8 @@ class SettingsScreen extends StatelessWidget {
                             child:
                             Column(
                               children: [
-                                Text('${SocialCubit.get(context).myFollowing.length}',style: Theme.of(context).textTheme.bodyText1),
-                                Text('Following',style: Theme.of(context).textTheme.caption?.copyWith(fontWeight: FontWeight.bold,color: Colors.grey),),
+                                Text('${SocialCubit.get(context).myFollowing.length}',style: Theme.of(context).textTheme.bodyLarge),
+                                Text('Following',style: Theme.of(context).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold,color: Colors.grey),),
                               ],
                             ),
                             onTap: (){
@@ -127,7 +127,7 @@ class SettingsScreen extends StatelessWidget {
                       children: [
                         Expanded(child: OutlinedButton(onPressed: (){
                           NavigateTo(context, const AddPostScreen());
-                        }, child: Text('Add Posts',style: Theme.of(context).textTheme.subtitle1?.copyWith(color: defaultColor,fontWeight: FontWeight.bold),))),
+                        }, child: Text('Add Posts',style: Theme.of(context).textTheme.titleLarge?.copyWith(color: defaultColor,fontWeight: FontWeight.bold),))),
                         IconButton(
                             color: defaultColor,
                             onPressed: (){
@@ -143,7 +143,7 @@ class SettingsScreen extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context,index) => cubit.myPosts.isEmpty ? const Center(
                         child: Image(image: AssetImage('assets/images/empty.png'), width: 200.0, ),
-                      )  : buildPostItem(cubit.myPosts[index],context , index , controller) ,
+                      )  : buildPostItem( cubit.myPosts[index] as PostDataModel,context , index , controller) ,
                       itemCount: cubit.myPosts.length,
                       separatorBuilder: (BuildContext context, int index) => SizedBox(height: 15.0,),
                     )
@@ -195,7 +195,7 @@ class SettingsScreen extends StatelessWidget {
                     '${model.dateTime}',
                     style: Theme.of(context)
                         .textTheme
-                        .caption
+                        .bodySmall
                         ?.copyWith(color: Colors.grey[600]),
                   )
                 ],
