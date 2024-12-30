@@ -1,16 +1,7 @@
-# to_do_app
+# Social App
 
-A new Flutter project.
+A new Flutter project login to app and register, view posts and add it add Likes and Comments, chat with friends, view your profile information and edit on it view My Posts in my page, view users, view Followers and Following.
 
-## Getting Started
+## Video Tutoral To help you use the program :
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+https://github.com/user-attachments/assets/c7241cee-2670-4764-ac67-0a7fb3df108a
